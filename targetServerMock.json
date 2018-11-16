@@ -1,0 +1,8 @@
+[
+	{
+		"name": "userApiMock",
+		"host": "virtserver.swaggerhub.com ",
+		"isEnabled": true,
+		"port": 80
+	}
+]
