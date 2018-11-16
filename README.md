@@ -1,5 +1,4 @@
 # code_challenge
-Repositorio para incluir desarrollo del code challenge
 
 El mock server está implementado sobre swaggerhub con lo que no se reproducen determinados estados como los 404, así como solo simula inserción, actualización y borrado no haciéndolo realmente.
 
