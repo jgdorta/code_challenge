@@ -1,0 +1,231 @@
+swagger: '2.0'
+info:
+  description: ''
+  version: 7.0.0
+  title: UsersApi
+host: gdorta-eval-test.apigee.net
+schemes:
+  - http
+  - https
+basePath: /api
+paths:
+  /oauth/accesstoken:
+    post:
+      operationId: Generate-Access-Token
+      description: Get access token
+      security: 
+        - basic: []
+      consumes:
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+      parameters:
+        - name: grant_type
+          description: The grant type is client_credentials
+          required: true
+          in: formData
+          type: string        
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/token'  
+  /users:
+    get:
+      operationId: Get-Users
+      description: Get all users
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token authorization
+          type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/user'          
+    post:
+      operationId: Create-User
+      description: Create new user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token authorization
+          type: string
+          required: true      
+        - in: body
+          name: user
+          schema:
+            $ref: '#/definitions/user'
+          required: true      
+      responses:
+        '201':
+          description: successful operation
+        '405':
+          description: Invalid input
+          schema:
+            $ref: '#/definitions/error'          
+  /users/id:
+    get:
+      operationId: Get-User
+      description: Get user by id
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token authorization
+          type: string
+          required: true        
+        - in: path
+          name: id
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: successful operation
+          schema:
+            $ref: '#/definitions/user'           
+        '400':
+          description: Invalid user id
+          schema:
+            $ref: '#/definitions/error'
+        '404':
+          description: User not found
+          schema:
+            $ref: '#/definitions/error'               
+    put:
+      operationId: Update-User
+      description: Update existing user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token authorization
+          type: string
+          required: true
+        - in: path
+          name: id
+          type: integer
+          required: true 
+        - in: body
+          name: user
+          schema:
+            $ref: '#/definitions/user'
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid user id
+          schema:
+            $ref: '#/definitions/error'          
+        '404':
+          description: User not found
+          schema:
+            $ref: '#/definitions/error'
+        '405':
+          description: Invalid input
+          schema:
+            $ref: '#/definitions/error'                
+    delete:
+      operationId: Delete-User
+      description: Delete existing user
+      parameters:
+        - in: header
+          name: Authorization
+          description: Bearer token authorization
+          type: string
+          required: true      
+        - in: path
+          name: id
+          type: integer
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Invalid user id
+          schema:
+            $ref: '#/definitions/error'
+        '404':
+          description: User not found
+          schema:
+            $ref: '#/definitions/error'  
+securityDefinitions:
+  basic:
+    type: apiKey
+    name: Authorization
+    in: header
+definitions:
+  token:
+    properties:
+      refresh_token_expires_in:
+        type: string
+      api_product_list: 
+        type: string
+      api_product_list_json:
+        type: array
+        items:
+          type: string
+      organization_name:
+        type: string
+      developer.email:
+        type: string
+      token_type:
+        type: string
+      issued_at:
+        type: string
+      client_id:
+        type: string
+      access_token:
+        type: string
+      application_name:
+        type: string
+      scope:
+        type: string
+      expires_in:
+        type: string
+      refresh_count:
+        type: string
+      status:
+        type: string
+  user:
+    properties:
+      id:
+        type: integer
+      name:
+        type: string
+      email:
+        type: string
+      birthDate:
+        type: string
+        format: LocalDateTime
+        description: LocalDateTime type
+      address:
+        $ref: '#/definitions/address'
+  address:
+    properties:
+      id:
+        type: integer
+      street:
+        type: string
+      state:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      zip:
+        type: string
+  error:
+    properties:
+      error:
+        type: object
+        properties:
+          statusCode:
+            type: string
+          details:
+            type: string
+          statusText:
+            type: string
