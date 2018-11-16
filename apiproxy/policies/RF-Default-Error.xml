@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<RaiseFault name="RF-Default-Error" async="false" continueOnError="false" enabled="true">
+    <DisplayName>RF-Default-Error</DisplayName>
+    <Properties/>
+    <FaultResponse>
+        <Set>
+            <Headers>
+                <Header name="Content-Type">application/json</Header>
+            </Headers>
+            <Payload contentType="application/json">
+                { "error": { "statusCode": "{flow.usersapi.error.statusCode}", "details": "{flow.usersapi.error.details}", "statusText": "{flow.usersapi.error.statusText}" } }
+            </Payload>
+            <StatusCode>{flow.usersapi.error.statusCode}</StatusCode>
+            <ReasonPhrase>{flow.usersapi.error.details}</ReasonPhrase>
+        </Set>
+    </FaultResponse>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+</RaiseFault>

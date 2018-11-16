@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndpoint name="default">
+    <Description/>
+    <FaultRules/>
+    <DefaultFaultRule name="all">
+        <AlwaysEnforce>true</AlwaysEnforce>
+        <Step>
+            <Name>AM-Default-Error-Variables</Name>
+            <Condition>(flow.usersapi.error.statusCode == null)</Condition>
+        </Step>
+        <Step>
+            <Name>RF-Default-Error</Name>
+        </Step>
+    </DefaultFaultRule>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>Q-Requests-Per-Minute</Name>
+            </Step>
+            <Step>
+                <Name>AM-Add-CORS</Name>
+                <Condition>request.verb == "OPTIONS"</Condition>
+            </Step>
+            <Step>
+                <Name>RC-Users</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request/>
+        <Response>
+            <Step>
+                <Name>AM-Add-Origin</Name>
+                <Condition>request.header.Origin != null</Condition>
+            </Step>
+        </Response>
+    </PostFlow>
+    <Flows>
+        <Flow name="Get-Users">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>VerifyAccessToken</Name>
+                </Step>
+                <Step>
+                    <Name>RF-Custom-Error</Name>
+                    <Condition>(flow.usersapi.error.statusCode != null)</Condition>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/users") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Create-User">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>VerifyAccessToken</Name>
+                </Step>
+                <Step>
+                    <Name>JS-Request-Validation</Name>
+                </Step>
+                <Step>
+                    <Name>RF-Custom-Error</Name>
+                    <Condition>(flow.usersapi.error.statusCode != null)</Condition>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/users") and (request.verb = "POST")</Condition>
+        </Flow>
+        <Flow name="Get-User">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>VerifyAccessToken</Name>
+                </Step>
+                <Step>
+                    <Name>remove-header-authorization</Name>
+                </Step>
+                <Step>
+                    <Name>EX-User-Id</Name>
+                </Step>
+                <Step>
+                    <Name>JS-User-Id-Validation</Name>
+                </Step>
+                <Step>
+                    <Name>RF-Custom-Error</Name>
+                    <Condition>(flow.usersapi.error.statusCode != null)</Condition>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/users/*") and (request.verb = "GET")</Condition>
+        </Flow>
+        <Flow name="Update-User">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>VerifyAccessToken</Name>
+                </Step>
+                <Step>
+                    <Name>EX-User-Id</Name>
+                </Step>
+                <Step>
+                    <Name>JS-User-Id-Validation</Name>
+                </Step>
+                <Step>
+                    <Name>JS-Request-Validation</Name>
+                </Step>
+                <Step>
+                    <Name>RF-Custom-Error</Name>
+                    <Condition>(flow.usersapi.error.statusCode != null)</Condition>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/users/*") and (request.verb = "PUT")</Condition>
+        </Flow>
+        <Flow name="Delete-User">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>VerifyAccessToken</Name>
+                </Step>
+                <Step>
+                    <Name>EX-User-Id</Name>
+                </Step>
+                <Step>
+                    <Name>JS-User-Id-Validation</Name>
+                </Step>
+                <Step>
+                    <Name>RF-Custom-Error</Name>
+                    <Condition>(flow.usersapi.error.statusCode != null)</Condition>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>(proxy.pathsuffix MatchesPath "/users/*") and (request.verb = "DELETE")</Condition>
+        </Flow>
+        <Flow name="NotFound">
+            <Description/>
+            <Request>
+                <Step>
+                    <Name>AM-Not-Found-Error</Name>
+                </Step>
+                <Step>
+                    <Name>RF-Custom-Error</Name>
+                </Step>
+            </Request>
+            <Response/>
+            <Condition>request.verb != "OPTIONS"</Condition>
+        </Flow>
+    </Flows>
+    <HTTPProxyConnection>
+        <BasePath>/api</BasePath>
+        <Properties/>
+        <VirtualHost>default</VirtualHost>
+        <VirtualHost>secure</VirtualHost>
+    </HTTPProxyConnection>
+    <RouteRule name="preflight">
+        <Condition>request.verb == "OPTIONS"</Condition>
+    </RouteRule>
+    <RouteRule name="GetUser">
+        <TargetEndpoint>Get-User</TargetEndpoint>
+        <Condition>(proxy.pathsuffix MatchesPath "/users/*") and (request.verb = "GET")</Condition>
+    </RouteRule>
+    <RouteRule name="GetUsers">
+        <TargetEndpoint>Get-Users</TargetEndpoint>
+        <Condition>(proxy.pathsuffix MatchesPath "/users") and (request.verb = "GET")</Condition>
+    </RouteRule>
+    <RouteRule name="CreateUser">
+        <TargetEndpoint>Create-User</TargetEndpoint>
+        <Condition>(proxy.pathsuffix MatchesPath "/users") and (request.verb = "POST")</Condition>
+    </RouteRule>
+    <RouteRule name="UpdateUser">
+        <TargetEndpoint>Update-User</TargetEndpoint>
+        <Condition>(proxy.pathsuffix MatchesPath "/users/*") and (request.verb = "PUT")</Condition>
+    </RouteRule>
+    <RouteRule>
+        <TargetEndpoint>Delete-User</TargetEndpoint>
+        <Condition>(proxy.pathsuffix MatchesPath "/users/*") and (request.verb = "DELETE")</Condition>
+    </RouteRule>
+    <RouteRule name="noroute"/>
+</ProxyEndpoint>

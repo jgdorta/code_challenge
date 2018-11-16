@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Quota name="Q-Requests-Per-Minute" enabled="true" continueOnError="false" async="false">
+    <DisplayName>Q-Requests-Per-Minute</DisplayName>
+    <Properties/>
+    <Allow count="1000" countRef="verifyapikey.verify-api-key.apiproduct.developer.quota.limit"/>
+    <Interval ref="verifyapikey.VerifyAPIKey.apiproduct.developer.quota.interval">1</Interval>
+    <TimeUnit ref="verifyapikey.VerifyAPIKey.apiproduct.developer.quota.timeunit">minute</TimeUnit>
+</Quota>

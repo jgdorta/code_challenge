@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Javascript name="JS-User-Id-Validation" async="false" continueOnError="false" enabled="true" timeLimit="200">
+    <DisplayName>JS-User-Id-Validation</DisplayName>
+    <Properties/>
+    <IncludeURL>jsc://utils.js</IncludeURL>
+    <ResourceURL>jsc://JS-User-Id-Validation.js</ResourceURL>
+</Javascript>

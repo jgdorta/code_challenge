@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="AM-Default-Error-Variables" enabled="true" continueOnError="false" async="false">
+    <DisplayName>AM-Default-Error-Variables</DisplayName>
+    <AssignVariable>
+        <Name>flow.usersapi.error.statusText</Name>
+        <Ref>fault.name</Ref>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.usersapi.error.details</Name>
+        <Ref>error.reason.phrase</Ref>
+        <Value>Internal Server Error</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.usersapi.error.statusCode</Name>
+        <Ref>error.status.code</Ref>
+        <Value>500</Value>
+    </AssignVariable>
+</AssignMessage>

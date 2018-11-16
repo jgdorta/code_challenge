@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ResponseCache name="RC-Users" enabled="true" continueOnError="false" async="false">
+    <DisplayName>RC-Users</DisplayName>
+    <FaultRules/>
+    <Properties/>
+    <CacheKey>
+        <Prefix/>
+        <KeyFragment type="string" ref="request.uri"/>
+        <KeyFragment type="string" ref="request.verb"/>
+    </CacheKey>
+    <Scope>Exclusive</Scope>
+    <ExpirySettings>
+        <ExpiryDate/>
+        <TimeOfDay/>
+        <TimeoutInSec ref="">60</TimeoutInSec>
+    </ExpirySettings>
+    <ExcludeErrorResponse>true</ExcludeErrorResponse>
+    <SkipCacheLookup/>
+    <SkipCachePopulation/>
+    <UseAcceptHeader>false</UseAcceptHeader>
+    <UseResponseCacheHeaders>false</UseResponseCacheHeaders>
+</ResponseCache>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="AM-Not-Found-Error" enabled="true" continueOnError="false" async="false">
+    <DisplayName>AM-Not-Found-Error</DisplayName>
+    <AssignVariable>
+        <Name>flow.usersapi.error.statusText</Name>
+        <Value>Not_found</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.usersapi.error.details</Name>
+        <Value>The requested resource could not be found</Value>
+    </AssignVariable>
+    <AssignVariable>
+        <Name>flow.usersapi.error.statusCode</Name>
+        <Value>404</Value>
+    </AssignVariable>
+</AssignMessage>

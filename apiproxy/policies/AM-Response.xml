@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<AssignMessage name="AM-Response" async="false" continueOnError="false" enabled="true">
+    <DisplayName>AM-Response</DisplayName>
+    <Properties/>
+    <Set>
+        <Payload contentType="application/json">
+            {
+                "id": "{user.id}",
+                "name": "{user.name}",
+                "email": "{user.email}",
+                "birthDate": "{user.birthDate}",
+                "address": {user.address}
+            }
+        </Payload>
+    </Set>
+</AssignMessage>

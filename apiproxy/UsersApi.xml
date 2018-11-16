@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<APIProxy revision="7" name="UsersApi">
+    <Basepaths>/api</Basepaths>
+    <ConfigurationVersion majorVersion="4" minorVersion="0"/>
+    <CreatedAt>1542116847158</CreatedAt>
+    <CreatedBy>gdorta@encamina.com</CreatedBy>
+    <Description></Description>
+    <DisplayName>UsersApi</DisplayName>
+    <LastModifiedAt>1542289506152</LastModifiedAt>
+    <LastModifiedBy>gdorta@encamina.com</LastModifiedBy>
+    <ManifestVersion>SHA-512:09420e76a1a2b2f202b35b513030efeaf7d1e4a140d8a8fb1d42028608ca7838600455592d787d8c357da214cb98b910d9f56653458d138ef8aed937c5054d62</ManifestVersion>
+    <Policies>
+        <Policy>AM-Add-CORS</Policy>
+        <Policy>AM-Add-Origin</Policy>
+        <Policy>AM-Default-Error-Variables</Policy>
+        <Policy>AM-Not-Found-Error</Policy>
+        <Policy>AM-Path-Suffix-False</Policy>
+        <Policy>AM-Response-No-Content</Policy>
+        <Policy>AM-Response</Policy>
+        <Policy>EV-Request</Policy>
+        <Policy>EX-User-Id</Policy>
+        <Policy>GenerateAccessToken</Policy>
+        <Policy>JS-Request-Validation</Policy>
+        <Policy>JS-User-Id-Validation</Policy>
+        <Policy>Q-Requests-Per-Minute</Policy>
+        <Policy>RC-Users</Policy>
+        <Policy>RF-Custom-Error</Policy>
+        <Policy>RF-Default-Error</Policy>
+        <Policy>VerifyAccessToken</Policy>
+        <Policy>remove-header-authorization</Policy>
+    </Policies>
+    <ProxyEndpoints>
+        <ProxyEndpoint>Oauth</ProxyEndpoint>
+        <ProxyEndpoint>default</ProxyEndpoint>
+    </ProxyEndpoints>
+    <Resources>
+        <Resource>jsc://JS-Request-Validation.js</Resource>
+        <Resource>jsc://JS-User-Id-Validation.js</Resource>
+        <Resource>jsc://utils.js</Resource>
+    </Resources>
+    <Spec></Spec>
+    <TargetServers/>
+    <TargetEndpoints>
+        <TargetEndpoint>Create-User</TargetEndpoint>
+        <TargetEndpoint>Delete-User</TargetEndpoint>
+        <TargetEndpoint>Get-User</TargetEndpoint>
+        <TargetEndpoint>Get-Users</TargetEndpoint>
+        <TargetEndpoint>Update-User</TargetEndpoint>
+    </TargetEndpoints>
+</APIProxy>

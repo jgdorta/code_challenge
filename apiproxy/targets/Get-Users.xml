@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<TargetEndpoint name="Get-Users">
+    <Description/>
+    <FaultRules/>
+    <PreFlow name="PreFlow">
+        <Request>
+            <Step>
+                <Name>AM-Path-Suffix-False</Name>
+            </Step>
+        </Request>
+        <Response/>
+    </PreFlow>
+    <PostFlow name="PostFlow">
+        <Request>
+        </Request>
+        <Response>
+            <Step>
+                <Name>RC-Users</Name>
+            </Step>
+        </Response>
+    </PostFlow>
+    <Flows/>
+    <HTTPTargetConnection>
+        <LoadBalancer>
+            <Server name="usersApiMock"/>
+        </LoadBalancer>
+        <Path>/gdorta/UsersAPI/1.0.0/getusers</Path>
+    </HTTPTargetConnection>
+</TargetEndpoint>

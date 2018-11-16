@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ExtractVariables name="EX-User-Id" enabled="true" continueOnError="false" async="false">
+    <DisplayName>EX-User-Id</DisplayName>
+    <Properties/>
+    <URIPath>
+        <Pattern ignoreCase="true">/users/{id}</Pattern>
+    </URIPath>
+    <Source clearPayload="false">request</Source>
+    <IgnoreUnresolvedVariables>true</IgnoreUnresolvedVariables>
+    <VariablePrefix>user</VariablePrefix>
+</ExtractVariables>
