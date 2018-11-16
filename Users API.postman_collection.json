@@ -1,0 +1,251 @@
+{
+	"info": {
+		"_postman_id": "ab7d9534-398d-495f-a454-8475dac5cf4f",
+		"name": "Users API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"id": "8f065c8f-748b-490a-a615-2692ff2cd23a",
+						"type": "text/javascript",
+						"exec": [
+							"pm.test(pm.info.requestName, () => {",
+							"    pm.response.to.not.be.error;",
+							"    pm.response.to.not.have.jsonBody('error');",
+							"});",
+							"pm.globals.set(\"bearerToken\", pm.response.json().access_token);"
+						]
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Basic cjJKVG1GQkhVaHdTZzdoM1FZYzYyU0dEaTlibFAxVHY6UFNqanRUTUZWd0QyNWtFMg=="
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/x-www-form-urlencoded"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "https://gdorta-eval-test.apigee.net/api/oauth/accesstoken",
+					"protocol": "https",
+					"host": [
+						"gdorta-eval-test",
+						"apigee",
+						"net"
+					],
+					"path": [
+						"api",
+						"oauth",
+						"accesstoken"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Users",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://gdorta-eval-test.apigee.net/api/users",
+					"protocol": "http",
+					"host": [
+						"gdorta-eval-test",
+						"apigee",
+						"net"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User by ID",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "grant_type",
+							"value": "client_credentials",
+							"description": "",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://gdorta-eval-test.apigee.net/api/users/1",
+					"protocol": "http",
+					"host": [
+						"gdorta-eval-test",
+						"apigee",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update User",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 4,\r\n  \"name\": \"Peter Kaufman\",\r\n  \"email\": \"p.kaufman.seller@email.com\",\r\n  \"birthDate\": \"26/03/1980\",\r\n  \"address\": {\r\n    \"id\": 1,\r\n    \"street\": \"one street beyond, 13\",\r\n    \"state\": \"state\",\r\n    \"city\": \"city\",\r\n    \"country\": \"country\",\r\n    \"zip\": \"48752\"\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://gdorta-eval-test.apigee.net/api/users/4",
+					"protocol": "http",
+					"host": [
+						"gdorta-eval-test",
+						"apigee",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create User",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"id\": 0,\r\n  \"name\": \"Peter Kaufman\",\r\n  \"email\": \"p.kaufman@email.com\",\r\n  \"birthDate\": \"26/03/1980\",\r\n  \"address\": {\r\n    \"id\": 0,\r\n    \"street\": \"one street, 15\",\r\n    \"state\": \"state\",\r\n    \"city\": \"city\",\r\n    \"country\": \"country\",\r\n    \"zip\": \"49652\"\r\n  }\r\n}"
+				},
+				"url": {
+					"raw": "http://gdorta-eval-test.apigee.net/api/users",
+					"protocol": "http",
+					"host": [
+						"gdorta-eval-test",
+						"apigee",
+						"net"
+					],
+					"path": [
+						"api",
+						"users"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete User",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {},
+				"url": {
+					"raw": "http://gdorta-eval-test.apigee.net/api/users/1",
+					"protocol": "http",
+					"host": [
+						"gdorta-eval-test",
+						"apigee",
+						"net"
+					],
+					"path": [
+						"api",
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{bearerToken}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "e06fd63a-4f90-41dd-bd35-5036b20db436",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "d9bf0bf6-963e-494e-957f-859c8eb4f6b3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	]
+}
